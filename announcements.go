@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	// "encoding/json"
 	// "io/ioutil"
 	// "net/http"
@@ -35,7 +36,7 @@ func createAnnouncementTable(announcements *[]Announcement, width int) *widgets.
   tableData = append(tableData, header)
   for _, ann := range *announcements {
         var announcementData []string
-        announcementData = append(announcementData, strip.StripTags(ann.Message))
+        announcementData = append(announcementData, strip.StripTags(strings.ReplaceAll(ann.Message, "&nbsp;", " ")))
         tableData = append(tableData, announcementData)
   }
 

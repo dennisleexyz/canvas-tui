@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	// "encoding/json"
 	// "io/ioutil"
 	// "net/http"
@@ -24,7 +25,7 @@ func createSyllabusGrid(course Course) *ui.Grid {
 
   p0 := widgets.NewParagraph()
   p0.Title = "Syllabus"
-  p0.Text = strip.StripTags(course.SyllabusBody)
+  p0.Text = strip.StripTags(strings.ReplaceAll(course.SyllabusBody, "&nbsp;", " "))
 	p0.Border = true
 
 	syllabusGrid := ui.NewGrid()

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	// "encoding/json"
 	// "io/ioutil"
 	// "net/http"
@@ -36,7 +37,7 @@ func createAnnouncementWindow(course Course, announcements *[]Announcement) *wid
   }
   p4.Text = "[Title](fg:blue,mod:bold): "+recentAnnouncement.Title+"\n"+
             "[Date](fg:blue,mod:bold): "+recentAnnouncement.PostedAt.Local().Format("Jan 2, 2006")+"\n\n"+
-            strip.StripTags(recentAnnouncement.Message)+"\n"
+            strip.StripTags(strings.ReplaceAll(recentAnnouncement.Message, "&nbsp;", " "))+"\n"
   return p4
 }
 
@@ -44,7 +45,7 @@ func createSyllabusWindow(course Course) *widgets.Paragraph {
   p4 := widgets.NewParagraph()
 	p4.Title = "Syllabus"
 	p4.BorderStyle.Fg = ui.ColorYellow
-  p4.Text = strip.StripTags(course.SyllabusBody)
+  p4.Text = strip.StripTags(strings.ReplaceAll(course.SyllabusBody, "&nbsp;", " "))
   return p4
 }
 
